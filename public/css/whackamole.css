@@ -1,0 +1,16 @@
+
+.hider {
+    background-color: gray;
+    height: 100px;
+    width: 100px;
+    border: 1px solid black;
+    float: left;
+}
+
+.box {
+    background-color: red;
+    height: 100px;
+    width: 100px;
+    border: 1px solid black;
+    float: left;
+}

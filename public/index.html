@@ -2,8 +2,113 @@
 <html>
 <head>
     <title>Whack-a-mole</title>
+    <meta charset="utf-8">
+    <!-- google font -->
+
+    <!-- bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+    <!-- my css -->
+    <link rel="stylesheet" href="/css/whackamole.css">
+
 </head>
 <body>
 
+<div class="container">
+
+    <div class="row">
+        <div class="col-xs-12">Whack-a-Mole</div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12 status">Score: </div>
+    </div>
+    <div class="row">
+        <div class="hider">
+            <div class="col-md-4" data-index="0">Mole One</div>
+        </div>
+        <div class="hider">
+            <div class="col-md-4" data-index="1">Mole Two</div>
+        </div>
+        <div class="hider">
+            <div class="col-md-4" data-index="2">Mole Three</div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="hider">
+            <div class="col-md-4" data-index="3">Mole Four</div>
+        </div>
+        <div class="hider">
+            <div class="col-md-4" data-index="4">Mole Five</div>
+        </div>
+        <div class="hider">
+            <div class="col-md-4" data-index="5">Mole Six</div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="hider">
+            <div class="col-md-4" data-index="6">Mole Seven</div>
+        </div>
+        <div class="hider">
+            <div class="col-md-4" data-index="7">Mole Eight</div>
+        </div>
+        <div class="hider">
+            <div class="col-md-4" data-index="8">Mole Nine</div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="btn-row">
+            <button id="start">Start</button>
+        </div>
+    </div>
+
+</div>
+
+<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+
+<script type="text/javascript">
+(function(){
+"use strict";
+ 
+    // var for later grabbing all elements by class
+    var hider = $(".hider");
+
+    // variable for game count
+    var score = 0;
+
+    // to make moles appear
+    var flashMole = function() {
+        // randomize a numerical value from 0-7 for boxes
+        var random = Math.floor(Math.random()*8);
+            console.log(random);
+        hider.eq(random).addClass("box");
+
+        var disappear = setTimeout(function(){
+            hider.eq(random).removeClass("box");
+        }, 4000);
+        
+        // click listener for boxes
+        $(".hider").click(function(){
+            hider.removeClass("box");
+            score++;
+            $(".status").html("Score: " + score);
+        });
+    };
+
+    // click listener and game start
+    $("#start").click(function(event) {
+        console.log("start clicked");
+        score;
+        // playSuccess();
+        flashMole();
+    })
+
+})();
+</script>
 </body>
 </html>
