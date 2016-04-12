@@ -20,6 +20,7 @@
 
     <div class="row">
         <div class="col-xs-12 main-head">Catch-a-Butterfly</div>
+        <div class="high-score">High Score: </div>
     </div>
 
     <div class="row">
@@ -95,19 +96,21 @@ $(document).ready(function() {
         var disappear = setTimeout(function(){
             butterfly.eq(random).addClass("make-visible");
         }, 3000);
-        
+    };
+
+    // click listener and game start
+    $("#start").click(function(event) {
+        // removes listeners of start click event
+        $(".butterfly").off("click");
+        console.log("start clicked");
+        flashButterfly();
+
         // click listener for boxes
         $(".butterfly").click(function(){
             butterfly.addClass("make-visible");
             score++;
             $(".status").html("Score: " + score);
         });
-    };
-
-    // click listener and game start
-    $("#start").click(function(event) {
-        console.log("start clicked");
-        flashButterfly();
     });
 
 // fix scoring
