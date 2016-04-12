@@ -1,16 +1,37 @@
-
-.hider {
-    background-color: gray;
-    height: 100px;
-    width: 100px;
-    border: 1px solid black;
-    float: left;
+body {
+    background:
+        url(/img/flowers.png) no-repeat bottom right,
+        url(/img/tree.png) no-repeat center,
+        url(/img/field.jpg) no-repeat center;
+    background-size: 20%, 75%, cover;
+    font-family: "Oleo Script Swash Caps", cursive;
+    color: #2d2518;
 }
 
-.box {
-    background-color: red;
-    height: 100px;
-    width: 100px;
-    border: 1px solid black;
+.main-head {
+    font-size: 3em;
+}
+
+.text {
+    font-size: 2em
+}
+
+.cage {
+    background-color: transparent;
+    height: 200px;
+    width: 33%;
     float: left;
+    cursor: url(/img/net.png), default;
+}
+
+button {
+    background-color: #f2d365;
+    border-radius: 5px;
+    color: #2d2518;
+    border: 1px solid #2d2518;
+    margin-top: 50px;
+}
+
+.make-visible img {
+    opacity: 0;
 }

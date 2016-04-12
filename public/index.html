@@ -3,7 +3,9 @@
 <head>
     <title>Whack-a-mole</title>
     <meta charset="utf-8">
+
     <!-- google font -->
+    <link href='https://fonts.googleapis.com/css?family=Oleo+Script+Swash+Caps' rel='stylesheet' type='text/css'>
 
     <!-- bootstrap -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
@@ -17,51 +19,51 @@
 <div class="container">
 
     <div class="row">
-        <div class="col-xs-12">Whack-a-Mole</div>
+        <div class="col-xs-12 main-head">Catch-a-Butterfly</div>
     </div>
 
     <div class="row">
-        <div class="col-xs-12 status">Score: </div>
+        <div class="col-xs-12 status text">Score: </div>
     </div>
     <div class="row">
-        <div class="hider">
-            <div class="col-md-4" data-index="0">Mole One</div>
+        <div class="cage">
+            <div class="col-md-4 make-visible butterfly net" data-index="0"><img src="/img/monarchLeft.png"></div>
         </div>
-        <div class="hider">
-            <div class="col-md-4" data-index="1">Mole Two</div>
+        <div class="cage">
+            <div class="col-md-4 make-visible butterfly net" data-index="1"><img src="/img/blueCenterButterfly.png"></div>
         </div>
-        <div class="hider">
-            <div class="col-md-4" data-index="2">Mole Three</div>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="hider">
-            <div class="col-md-4" data-index="3">Mole Four</div>
-        </div>
-        <div class="hider">
-            <div class="col-md-4" data-index="4">Mole Five</div>
-        </div>
-        <div class="hider">
-            <div class="col-md-4" data-index="5">Mole Six</div>
+        <div class="cage">
+            <div class="col-md-4 make-visible butterfly net" data-index="2"><img src="/img/blueRightButterfly.png"></div>
         </div>
     </div>
 
     <div class="row">
-        <div class="hider">
-            <div class="col-md-4" data-index="6">Mole Seven</div>
+        <div class="cage">
+            <div class="col-md-4 make-visible butterfly" data-index="3"><img src="/img/pinkLeftButterfly.png"></div>
         </div>
-        <div class="hider">
-            <div class="col-md-4" data-index="7">Mole Eight</div>
+        <div class="cage">
+            <div class="col-md-4 make-visible butterfly" data-index="4"><img src="/img/iridCenterButterfly.png"></div>
         </div>
-        <div class="hider">
-            <div class="col-md-4" data-index="8">Mole Nine</div>
+        <div class="cage">
+            <div class="col-md-4 make-visible butterfly" data-index="5"><img src="/img/purpleRightButterfly.png"></div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="cage">
+            <div class="col-md-4 make-visible butterfly" data-index="6"><img src="/img/yellowLeftButterfly.png"></div>
+        </div>
+        <div class="cage">
+            <div class="col-md-4 make-visible butterfly" data-index="7"><img src="/img/purpleCenterButterfly.png"></div>
+        </div>
+        <div class="cage">
+            <div class="col-md-4 make-visible butterfly" data-index="8"><img src="/img/multiRightButterfly.png"></div>
         </div>
     </div>
 
     <div class="row">
         <div class="btn-row">
-            <button id="start">Start</button>
+            <button id="start" class="text">Start</button>
         </div>
     </div>
 
@@ -73,28 +75,35 @@
 
 <script type="text/javascript">
 (function(){
+$(document).ready(function() {
 "use strict";
  
+    // to make cursor change
+    // function swapCursor() {
+    //     document.getElementsByClassName(".butterfly").style.cursor = "net";
+    // };
+
     // var for later grabbing all elements by class
-    var hider = $(".hider");
+    var butterfly = $(".butterfly");
+    console.log(butterfly);
 
     // variable for game count
     var score = 0;
 
-    // to make moles appear
-    var flashMole = function() {
+    // to make butterflies appear
+    var flashButterfly = function() {
         // randomize a numerical value from 0-7 for boxes
         var random = Math.floor(Math.random()*8);
             console.log(random);
-        hider.eq(random).addClass("box");
+        butterfly.eq(random).removeClass("make-visible");
 
         var disappear = setTimeout(function(){
-            hider.eq(random).removeClass("box");
+            butterfly.eq(random).addClass("make-visible");
         }, 4000);
         
         // click listener for boxes
-        $(".hider").click(function(){
-            hider.removeClass("box");
+        $(".butterfly").click(function(){
+            butterfly.addClass("make-visible");
             score++;
             $(".status").html("Score: " + score);
         });
@@ -105,9 +114,9 @@
         console.log("start clicked");
         score;
         // playSuccess();
-        flashMole();
+        flashButterfly();
     })
-
+});
 })();
 </script>
 </body>
