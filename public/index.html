@@ -20,45 +20,46 @@
 
     <div class="row">
         <div class="col-xs-12 main-head">Catch-a-Butterfly</div>
-        <div class="high-score">High Score: </div>
+        <div class="high-score"></div>
     </div>
 
     <div class="row">
-        <div class="col-xs-12 status text">Score: </div>
+        <div class="col-xs-12 status score">Score: </div>
+        <div class="end"></div>
     </div>
     <div class="row">
         <div class="cage">
-            <div class="col-md-4 make-visible butterfly" data-index="0"><img src="/img/monarchLeft.png"></div>
+            <div class="col-md-4 invisible butterfly" data-index="0"><img src="/img/monarchLeft.png"></div>
         </div>
         <div class="cage">
-            <div class="col-md-4 make-visible butterfly" data-index="1"><img src="/img/blueCenterButterfly.png"></div>
+            <div class="col-md-4 invisible butterfly" data-index="1"><img src="/img/blueCenterButterfly.png"></div>
         </div>
         <div class="cage">
-            <div class="col-md-4 make-visible butterfly" data-index="2"><img src="/img/blueRightButterfly.png"></div>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="cage">
-            <div class="col-md-4 make-visible butterfly" data-index="3"><img src="/img/pinkLeftButterfly.png"></div>
-        </div>
-        <div class="cage">
-            <div class="col-md-4 make-visible butterfly" data-index="4"><img src="/img/iridCenterButterfly.png"></div>
-        </div>
-        <div class="cage">
-            <div class="col-md-4 make-visible butterfly" data-index="5"><img src="/img/purpleRightButterfly.png"></div>
+            <div class="col-md-4 invisible butterfly" data-index="2"><img src="/img/blueRightButterfly.png"></div>
         </div>
     </div>
 
     <div class="row">
         <div class="cage">
-            <div class="col-md-4 make-visible butterfly" data-index="6"><img src="/img/yellowLeftButterfly.png"></div>
+            <div class="col-md-4 invisible butterfly" data-index="3"><img src="/img/pinkLeftButterfly.png"></div>
         </div>
         <div class="cage">
-            <div class="col-md-4 make-visible butterfly" data-index="7"><img src="/img/purpleCenterButterfly.png"></div>
+            <div class="col-md-4 invisible butterfly" data-index="4"><img src="/img/iridCenterButterfly.png"></div>
         </div>
         <div class="cage">
-            <div class="col-md-4 make-visible butterfly" data-index="8"><img src="/img/multiRightButterfly.png"></div>
+            <div class="col-md-4 invisible butterfly" data-index="5"><img src="/img/purpleRightButterfly.png"></div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="cage">
+            <div class="col-md-4 invisible butterfly" data-index="6"><img src="/img/yellowLeftButterfly.png"></div>
+        </div>
+        <div class="cage">
+            <div class="col-md-4 invisible butterfly" data-index="7"><img src="/img/purpleCenterButterfly.png"></div>
+        </div>
+        <div class="cage">
+            <div class="col-md-4 invisible butterfly" data-index="8"><img src="/img/multiRightButterfly.png"></div>
         </div>
     </div>
 
@@ -81,44 +82,85 @@ $(document).ready(function() {
  
     // var for later grabbing all elements by class
     var butterfly = $(".butterfly");
-    console.log(butterfly);
 
     // variable for game count
     var score = 0;
 
-    // to make butterflies appear
+    var highScore = 0;
+
+    // get "highScore" from localStorage
+    localStorage.getItem("highScore");
+    // if "highScore" from localStorage exists assign highScore the value from localStorage
+        if ("highScore", highScore) {
+            localStorage.setItem("highScore");
+        };
+
+    var disappear;
+
+    
+    // var for endgame stuff: remove listeners, show user a failure thing
+    var endGame = function(){
+        $(".butterfly").off("click");
+        $(".end").html("Game Over");
+        clearTimeout(disappear);
+        var currentScore = score;
+            if (currentScore > highScore) {
+                $(".high-score").html(currentScore);
+                localStorage.setItem("highScore");
+            };
+    };
+
+    // to make butterfly appear
     var flashButterfly = function() {
         // randomize a numerical value from 0-7 for boxes
         var random = Math.floor(Math.random()*8);
-            console.log(random);
-        butterfly.eq(random).removeClass("make-visible");
+        butterfly.eq(random).removeClass("invisible");
 
-        var disappear = setTimeout(function(){
-            butterfly.eq(random).addClass("make-visible");
-        }, 3000);
+        // to vanish butterfly
+        disappear = setTimeout(function(){
+            butterfly.eq(random).addClass("invisible");
+            // repeats flashButterfly function again
+                // recursive, repeats over and over 
+            flashButterfly();
+        }, 1000);
     };
 
     // click listener and game start
     $("#start").click(function(event) {
+
         // removes listeners of start click event
         $(".butterfly").off("click");
-        console.log("start clicked");
+
+        // reset and display score
+        score = 0;
+        $(".status").html("Score: " + score);
+    
+        // to set timer and butterfly interval
+        var currentScore = score;
+        var timer = 30;
+        var timerInterval = setInterval(function(){
+            $(".end").html(timer + " secs");
+            timer--;
+            // stops interval so butterflies don't repeat infinity
+            if (timer==0) {
+                clearInterval(timerInterval);
+                endGame();
+            };
+        }, 1000);
+
         flashButterfly();
 
         // click listener for boxes
-        $(".butterfly").click(function(){
-            butterfly.addClass("make-visible");
+        $(".butterfly").click(function(){     
+            butterfly.addClass("invisible");
             score++;
             $(".status").html("Score: " + score);
+            $(".end").html("");
+
+        
         });
+
     });
-
-// fix scoring
-// change to automatic repetitions and incrementing after intial start
-    // ie, after score =5 increase to 2, etc.
-
-
-
 
 
 });
