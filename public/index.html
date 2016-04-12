@@ -27,13 +27,13 @@
     </div>
     <div class="row">
         <div class="cage">
-            <div class="col-md-4 make-visible butterfly net" data-index="0"><img src="/img/monarchLeft.png"></div>
+            <div class="col-md-4 make-visible butterfly" data-index="0"><img src="/img/monarchLeft.png"></div>
         </div>
         <div class="cage">
-            <div class="col-md-4 make-visible butterfly net" data-index="1"><img src="/img/blueCenterButterfly.png"></div>
+            <div class="col-md-4 make-visible butterfly" data-index="1"><img src="/img/blueCenterButterfly.png"></div>
         </div>
         <div class="cage">
-            <div class="col-md-4 make-visible butterfly net" data-index="2"><img src="/img/blueRightButterfly.png"></div>
+            <div class="col-md-4 make-visible butterfly" data-index="2"><img src="/img/blueRightButterfly.png"></div>
         </div>
     </div>
 
@@ -78,11 +78,6 @@
 $(document).ready(function() {
 "use strict";
  
-    // to make cursor change
-    // function swapCursor() {
-    //     document.getElementsByClassName(".butterfly").style.cursor = "net";
-    // };
-
     // var for later grabbing all elements by class
     var butterfly = $(".butterfly");
     console.log(butterfly);
@@ -99,7 +94,7 @@ $(document).ready(function() {
 
         var disappear = setTimeout(function(){
             butterfly.eq(random).addClass("make-visible");
-        }, 4000);
+        }, 3000);
         
         // click listener for boxes
         $(".butterfly").click(function(){
@@ -112,10 +107,17 @@ $(document).ready(function() {
     // click listener and game start
     $("#start").click(function(event) {
         console.log("start clicked");
-        score;
-        // playSuccess();
         flashButterfly();
-    })
+    });
+
+// fix scoring
+// change to automatic repetitions and incrementing after intial start
+    // ie, after score =5 increase to 2, etc.
+
+
+
+
+
 });
 })();
 </script>
