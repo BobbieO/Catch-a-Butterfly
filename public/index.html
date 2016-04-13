@@ -86,32 +86,33 @@ $(document).ready(function() {
     // variable for game count
     var score = 0;
 
-    var highScore = 0;
-
-    // get "highScore" from localStorage
-    localStorage.getItem("highScore");
-    // if "highScore" from localStorage exists assign highScore the value from localStorage
-        if ("highScore", highScore) {
-            localStorage.setItem("highScore");
-        };
-
+    // variable to use in game function to vanish butterfly
     var disappear;
 
+    // if "highScore" from localStorage exists assign highScore the value from localStorage, show it on screen.
+    if (localStorage.highScore) {
+        var highScore = localStorage.getItem("highScore");
+         $(".high-score").html("High Score: " + highScore);
+    };
     
     // var for endgame stuff: remove listeners, show user a failure thing
     var endGame = function(){
         $(".butterfly").off("click");
         $(".end").html("Game Over");
         clearTimeout(disappear);
+
+        // if current score is greater than the stored high score, change high score
+            // storage to new value, show on screen
         var currentScore = score;
-            if (currentScore > highScore) {
-                $(".high-score").html(currentScore);
-                localStorage.setItem("highScore");
-            };
+        if (currentScore > highScore) {
+            $(".high-score").html("High Score: " + currentScore);
+            localStorage.setItem("highScore", currentScore);
+        };
     };
 
     // to make butterfly appear
     var flashButterfly = function() {
+
         // randomize a numerical value from 0-7 for boxes
         var random = Math.floor(Math.random()*8);
         butterfly.eq(random).removeClass("invisible");
@@ -119,8 +120,8 @@ $(document).ready(function() {
         // to vanish butterfly
         disappear = setTimeout(function(){
             butterfly.eq(random).addClass("invisible");
-            // repeats flashButterfly function again
-                // recursive, repeats over and over 
+            
+            // repeats flashButterfly function again, recursive
             flashButterfly();
         }, 1000);
     };
@@ -134,13 +135,14 @@ $(document).ready(function() {
         // reset and display score
         score = 0;
         $(".status").html("Score: " + score);
-    
+
         // to set timer and butterfly interval
         var currentScore = score;
         var timer = 30;
         var timerInterval = setInterval(function(){
             $(".end").html(timer + " secs");
             timer--;
+
             // stops interval so butterflies don't repeat infinity
             if (timer==0) {
                 clearInterval(timerInterval);
@@ -148,16 +150,15 @@ $(document).ready(function() {
             };
         }, 1000);
 
+        // run game core
         flashButterfly();
 
-        // click listener for boxes
+        // click listener for butterfly, to vanish on click, add to score
+            // write to score on screen
         $(".butterfly").click(function(){     
             butterfly.addClass("invisible");
             score++;
             $(".status").html("Score: " + score);
-            $(".end").html("");
-
-        
         });
 
     });
