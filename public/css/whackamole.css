@@ -1,10 +1,15 @@
 body {
-    /*to make three layers: background image, tree image, flowers image*/
+    /*if browser doesn't support fancy background*/
+    background-image: url(/img/field.jpg) no-repeat center;
+
+    /*to make layers: background image, tree image, flowers image, clouds images*/
     background:
+        url(/img/cloud.png) no-repeat top left,
+        url(/img/cloud.png) no-repeat top right,
         url(/img/flowers.png) no-repeat bottom right,
         url(/img/tree.png) no-repeat center,
         url(/img/field.jpg) no-repeat center;
-    background-size: 20%, 75%, cover;
+    background-size: 25%, 25%, 20%, 75%, cover;
     font-family: "Oleo Script Swash Caps", cursive;
     color: #2d2518;
 }
@@ -33,6 +38,7 @@ body {
     height: 200px;
     width: 33%;
     float: left;
+
     /*custom cursor image*/
     cursor: url(/img/net.png), default;
 }
