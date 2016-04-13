@@ -167,6 +167,7 @@ $(document).ready(function() {
         $(".butterfly").off("click");
         $(".end").html("Game Over");
         clearTimeout(disappear);
+        $(".butterfly").addClass("invisible");
 
         // if current score is greater than the stored high score, change high score
             // storage to new value, show on screen
@@ -176,7 +177,7 @@ $(document).ready(function() {
             localStorage.setItem("highScore", currentScore);
         };
     };
-    
+
 });
 })();
 </script>
