@@ -67,9 +67,17 @@
         <div class="btn-row">
             <button id="start" class="text">Start</button>
         </div>
+
+        <div>
+            <p class="link">Music courtesy of <a href="https://longzijun.wordpress.com/2011/11/24/short-instrumental-themes/" target="_">longzijun</a></p>
+        </div>
     </div>
 
 </div>
+
+<audio preload="auto" id="music">
+    <source src="/sound/equinox.mp3" type="audio/mpeg">
+</audio>
 
 <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 
@@ -88,6 +96,11 @@ $(document).ready(function() {
 
     // variable to use in game function to vanish butterfly
     var disappear;
+
+    // to play music
+    function playMusic() {
+        $("#music")[0].play();
+    };
 
     // if "highScore" from localStorage exists assign highScore the value from localStorage, show it on screen.
     if (localStorage.highScore) {
@@ -120,7 +133,7 @@ $(document).ready(function() {
         // to vanish butterfly
         disappear = setTimeout(function(){
             butterfly.eq(random).addClass("invisible");
-            
+
             // repeats flashButterfly function again, recursive
             flashButterfly();
         }, 1000);
@@ -128,6 +141,7 @@ $(document).ready(function() {
 
     // click listener and game start
     $("#start").click(function(event) {
+        playMusic();
 
         // removes listeners of start click event
         $(".butterfly").off("click");
