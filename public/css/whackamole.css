@@ -49,7 +49,17 @@ button {
     color: #2d2518;
     border: 1px solid #2d2518;
     margin-top: 50px;
-    font-size: 2em;
+    font-size: 2.5em;
+}
+
+.link {
+    margin-top: 10px;
+    font-size: 1em;
+}
+
+a:link, a:visited {
+    color: #2d2518;
+    text-decoration: underline;
 }
 
 .invisible img {
