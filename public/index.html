@@ -107,37 +107,6 @@ $(document).ready(function() {
         var highScore = localStorage.getItem("highScore");
          $(".high-score").html("High Score: " + highScore);
     };
-    
-    // var for endgame stuff: remove listeners, show user a failure thing
-    var endGame = function(){
-        $(".butterfly").off("click");
-        $(".end").html("Game Over");
-        clearTimeout(disappear);
-
-        // if current score is greater than the stored high score, change high score
-            // storage to new value, show on screen
-        var currentScore = score;
-        if (currentScore > highScore) {
-            $(".high-score").html("High Score: " + currentScore);
-            localStorage.setItem("highScore", currentScore);
-        };
-    };
-
-    // to make butterfly appear
-    var flashButterfly = function() {
-
-        // randomize a numerical value from 0-7 for boxes
-        var random = Math.floor(Math.random()*8);
-        butterfly.eq(random).removeClass("invisible");
-
-        // to vanish butterfly
-        disappear = setTimeout(function(){
-            butterfly.eq(random).addClass("invisible");
-
-            // repeats flashButterfly function again, recursive
-            flashButterfly();
-        }, 1000);
-    };
 
     // click listener and game start
     $("#start").click(function(event) {
@@ -176,8 +145,38 @@ $(document).ready(function() {
         });
 
     });
+    
+    // to make butterfly appear
+    var flashButterfly = function() {
 
+        // randomize a numerical value from 0-7 for boxes
+        var random = Math.floor(Math.random()*8);
+        butterfly.eq(random).removeClass("invisible");
 
+        // to vanish butterfly
+        disappear = setTimeout(function(){
+            butterfly.eq(random).addClass("invisible");
+
+            // repeats flashButterfly function again, recursive
+            flashButterfly();
+        }, 1000);
+    };
+
+    // var for endgame stuff: remove listeners, show user a failure thing
+    var endGame = function(){
+        $(".butterfly").off("click");
+        $(".end").html("Game Over");
+        clearTimeout(disappear);
+
+        // if current score is greater than the stored high score, change high score
+            // storage to new value, show on screen
+        var currentScore = score;
+        if (currentScore > highScore) {
+            $(".high-score").html("High Score: " + currentScore);
+            localStorage.setItem("highScore", currentScore);
+        };
+    };
+    
 });
 })();
 </script>
