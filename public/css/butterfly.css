@@ -9,9 +9,16 @@ body {
         url(/img/flowers.png) no-repeat bottom right,
         url(/img/tree.png) no-repeat center,
         url(/img/field.jpg) no-repeat center;
-    background-size: 25%, 25%, 20%, 75%, cover;
+    background-size: 25%, 25%, 20%, 70%, cover;
+        -webkit-background-size: 25%, 25%, 20%, 70%, cover;
+        -moz-background-size: 25%, 25%, 20%, 70%, cover;
+        -o-background-size: 25%, 25%, 20%, 70%, cover;
     font-family: "Oleo Script Swash Caps", cursive;
     color: #2d2518;
+}
+
+html, body {
+    min-height: 100%;
 }
 
 .main-head {
@@ -31,6 +38,16 @@ body {
 .score {
     font-size: 2em;
     width: 50%;
+}
+
+ul {
+    list-style-type: none;
+}
+
+.instruct {
+    text-align: right;
+    font-size: 1.3em;
+    text-shadow: 1px 1px 1px #f2d365;
 }
 
 .cage {
