@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Whack-a-mole</title>
+    <title>Catch-a-Butterfly</title>
     <meta charset="utf-8">
 
     <!-- google font -->
@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 
     <!-- my css -->
-    <link rel="stylesheet" href="/css/whackamole.css">
+    <link rel="stylesheet" href="/css/butterfly.css">
 
 </head>
 <body>
@@ -64,12 +64,20 @@
     </div>
 
     <div class="row">
-        <div class="btn-row">
+        <div class="btn-row col-xs-6">
             <button id="start" class="text">Start</button>
+
+            <p class="link">Music courtesy of <a href="https://longzijun.wordpress.com/2011/11/24/short-instrumental-themes/" target="_">longzijun</a></p>
         </div>
 
-        <div>
-            <p class="link">Music courtesy of <a href="https://longzijun.wordpress.com/2011/11/24/short-instrumental-themes/" target="_">longzijun</a></p>
+        <div class="col-xs-6 instruct">
+            <p>Game Instructions</p>
+                <ul>
+                    <li>Click the butterfly before it disappears.</li>
+                    <li>Each butterfly captured is worth one point.</li>
+                    <li>When the timer runs out, the game is over.</li>
+                    <li>Try to beat your high score!</li>
+                </ul>
         </div>
     </div>
 
@@ -81,105 +89,8 @@
 
 <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 
+<script src="/js/catchabutterfly.js"></script>
+
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
-
-<script type="text/javascript">
-(function(){
-$(document).ready(function() {
-"use strict";
- 
-    // var for later grabbing all elements by class
-    var butterfly = $(".butterfly");
-
-    // variable for game count
-    var score = 0;
-
-    // variable to use in game function to vanish butterfly
-    var disappear;
-
-    // to play music
-    function playMusic() {
-        $("#music")[0].play();
-    };
-
-    // if "highScore" from localStorage exists assign highScore the value from localStorage, show it on screen.
-    if (localStorage.highScore) {
-        var highScore = localStorage.getItem("highScore");
-         $(".high-score").html("High Score: " + highScore);
-    };
-
-    // click listener and game start
-    $("#start").click(function(event) {
-        playMusic();
-
-        // removes listeners of start click event
-        $(".butterfly").off("click");
-
-        // reset and display score
-        score = 0;
-        $(".status").html("Score: " + score);
-
-        // to set timer and butterfly interval
-        var currentScore = score;
-        var timer = 30;
-        var timerInterval = setInterval(function(){
-            $(".end").html(timer + " secs");
-            timer--;
-
-            // stops interval so butterflies don't repeat infinity
-            if (timer==0) {
-                clearInterval(timerInterval);
-                endGame();
-            };
-        }, 1000);
-
-        // run game core
-        flashButterfly();
-
-        // click listener for butterfly, to vanish on click, add to score
-            // write to score on screen
-        $(".butterfly").click(function(){     
-            butterfly.addClass("invisible");
-            score++;
-            $(".status").html("Score: " + score);
-        });
-
-    });
-    
-    // to make butterfly appear
-    var flashButterfly = function() {
-
-        // randomize a numerical value from 0-7 for boxes
-        var random = Math.floor(Math.random()*8);
-        butterfly.eq(random).removeClass("invisible");
-
-        // to vanish butterfly
-        disappear = setTimeout(function(){
-            butterfly.eq(random).addClass("invisible");
-
-            // repeats flashButterfly function again, recursive
-            flashButterfly();
-        }, 1000);
-    };
-
-    // var for endgame stuff: remove listeners, show user a failure thing
-    var endGame = function(){
-        $(".butterfly").off("click");
-        $(".end").html("Game Over");
-        clearTimeout(disappear);
-        $(".butterfly").addClass("invisible");
-
-        // if current score is greater than the stored high score, change high score
-            // storage to new value, show on screen
-        var currentScore = score;
-        if (currentScore > highScore) {
-            $(".high-score").html("High Score: " + currentScore);
-            localStorage.setItem("highScore", currentScore);
-        };
-    };
-
-});
-})();
-</script>
 </body>
 </html>
